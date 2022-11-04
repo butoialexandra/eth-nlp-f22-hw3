@@ -9,8 +9,7 @@ def _random_weight(semiring, **kwargs):
     from rayuela.base.semiring import (
         Real,
         Tropical,
-        String,
-        Log
+        String
     )
 
     if semiring is String:
@@ -29,10 +28,6 @@ def _random_weight(semiring, **kwargs):
 
     elif semiring is Tropical:
         return semiring(random.randint(0, 50))
-
-    elif semiring is Log:
-        random_weight = round(random.random() / s, 3)
-        return semiring(random_weight)
 
 
 def random_weight_negative(semiring):
