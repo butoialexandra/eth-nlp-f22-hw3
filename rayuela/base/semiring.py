@@ -18,10 +18,10 @@ class Semiring:
         self.score = score
 
     @classmethod
-    def zeros(cls, shape):
+    def zeros(cls, mat_shape):
         import numpy as np
 
-        return np.full(shape, cls.zero)
+        return np.full(mat_shape, cls.zero)
 
     @classmethod
     def chart(cls, default=None):
@@ -31,7 +31,7 @@ class Semiring:
 
     @classmethod
     def diag(cls, N):
-        W = cls.zeros(N, N)
+        W = cls.zeros((N, N))
         for n in range(N):
             W[n, n] = cls.one
 
