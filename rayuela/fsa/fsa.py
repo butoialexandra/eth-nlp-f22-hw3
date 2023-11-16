@@ -125,6 +125,23 @@ class FSA:
         self.δ = frozendict(self.δ)
         self.λ = frozendict(self.λ)
         self.ρ = frozendict(self.ρ)
+    
+    def accessible(self):
+        """computes the set of accessible states"""
+        A = set()
+        stack = [q for q, w in self.I if w != self.R.zero]
+        while stack:
+            i = stack.pop()
+            for _, j, _ in self.arcs(i):
+                if j not in A:
+                    stack.append(j)
+            A.add(i)
+
+        return A
+
+    def coaccessible(self):
+        """computes the set of co-accessible states"""
+        return self.reverse().accessible()
 
     @property
     def I(self) -> Generator[Tuple[State, Semiring], None, None]:
