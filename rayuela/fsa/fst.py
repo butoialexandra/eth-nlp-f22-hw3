@@ -36,7 +36,7 @@ class FST(FSA):
         super().__init__(R=R)
 
         # alphabet of output symbols
-        self.Delta = set()
+        self.Omega = set()
 
     def add_arc(self, i, a, b, j, w=None):
         if w is None: w = self.R.one
@@ -49,7 +49,7 @@ class FST(FSA):
 
         self.add_states([i, j])
         self.Sigma.add(a)
-        self.Delta.add(b)
+        self.Omega.add(b)
         self.δ[i][(a, b)][j] += w
 
     def set_arc(self, i, a, b, j, w=None):
@@ -63,12 +63,12 @@ class FST(FSA):
 
         self.add_states([i, j])
         self.Sigma.add(a)
-        self.Delta.add(b)
+        self.Omega.add(b)
         self.δ[i][(a, b)][j] = w
 
     def freeze(self):
         self.Sigma = frozenset(self.Sigma)
-        self.Delta = frozenset(self.Delta)
+        self.Omega = frozenset(self.Omega)
         self.Q = frozenset(self.Q)
         self.δ = frozendict(self.δ)
         self.λ = frozendict(self.λ)
