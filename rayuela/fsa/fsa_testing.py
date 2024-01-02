@@ -122,9 +122,9 @@ def fsa_structural_equality_report(fsa1: FSA | FST, fsa2: FSA | FST, title=None)
         mismatches["alphabet"].append(
             f"Input alphabets do not match: {fsa1.Sigma} != {fsa2.Sigma}"
         )
-    if isinstance(fsa1, FST) and isinstance(fsa2, FST) and fsa1.Delta != fsa2.Delta:
+    if isinstance(fsa1, FST) and isinstance(fsa2, FST) and fsa1.Omega != fsa2.Omega:
         mismatches["alphabet"].append(
-            f"Output alphabets do not match: {fsa1.Delta} != {fsa2.Delta}"
+            f"Output alphabets do not match: {fsa1.Omega} != {fsa2.Omega}"
         )
 
     # Check states set equality. We want to report the following:
