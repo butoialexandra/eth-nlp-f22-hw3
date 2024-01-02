@@ -1,5 +1,3 @@
-import unittest
-
 from rayuela.base.semiring import Boolean, Real
 from rayuela.base.symbol import Sym, ε
 from rayuela.fsa.fsa import FSA, State
@@ -83,37 +81,38 @@ def _make_fst2():
     return fst
 
 
-class TestFsaStructuralEqualityReport(unittest.TestCase):
-    def setUp(self):
-        # Create instances of FSA or FST for testing
-        self.fsa1 = _make_fsa1()
-        self.fsa2 = _make_fsa2()
-        self.fst1 = _make_fst1()
-        self.fst2 = _make_fst2()
-
-    def test_commutativity(self):
-        report1 = fsa_structural_equality_report(self.fsa1, self.fsa2)
-        report2 = fsa_structural_equality_report(self.fsa2, self.fsa1)
-        self.assertEqual(report1.structurally_equal, report2.structurally_equal)
-
-    def test_fsa_structural_equality(self):
-        report = fsa_structural_equality_report(self.fsa1, self.fsa2)
-        self.assertFalse(report.structurally_equal)
-
-        report = fsa_structural_equality_report(self.fsa1, self.fsa1)
-        self.assertTrue(report.structurally_equal)
-
-    def test_fst_structural_equality(self):
-        report = fsa_structural_equality_report(self.fst1, self.fst2)
-        self.assertFalse(report.structurally_equal)
-
-        report = fsa_structural_equality_report(self.fst1, self.fst1)
-        self.assertTrue(report.structurally_equal)
-
-    def test_fsa_fst_structural_inequality(self):
-        report = fsa_structural_equality_report(self.fsa1, self.fst1)
-        self.assertFalse(report.structurally_equal)
+# Create instances of FSA or FST for testing
+fsa1 = _make_fsa1()
+fsa2 = _make_fsa2()
+fst1 = _make_fst1()
+fst2 = _make_fst2()
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_commutativity():
+    report1 = fsa_structural_equality_report(fsa1, fsa2)
+    report2 = fsa_structural_equality_report(fsa2, fsa1)
+    assert report1.structurally_equal == report2.structurally_equal
+
+
+def test_fsa_structural_equality():
+    report = fsa_structural_equality_report(fsa1, fsa2)
+    assert not report.structurally_equal
+
+    # Just for visualization
+    print(report)
+
+    report = fsa_structural_equality_report(fsa1, fsa1)
+    assert report.structurally_equal
+
+
+def test_fst_structural_equality():
+    report = fsa_structural_equality_report(fst1, fst2)
+    assert not report.structurally_equal
+
+    report = fsa_structural_equality_report(fst1, fst1)
+    assert report.structurally_equal
+
+
+def test_fsa_fst_structural_inequality():
+    report = fsa_structural_equality_report(fsa1, fst1)
+    assert not report.structurally_equal
