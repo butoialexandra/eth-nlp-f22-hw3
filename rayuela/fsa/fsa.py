@@ -50,6 +50,21 @@ class FSA:
         # final weight function
         self.ρ = R.chart()
 
+    @property
+    def delta(self):
+        """ASCII shorthand property for self.δ"""
+        return self.δ
+
+    @property
+    def lambda_(self):
+        """ASCII shorthand property for self.λ"""
+        return self.λ
+
+    @property
+    def rho(self):
+        """ASCII shorthand property for self.ρ"""
+        return self.ρ
+
     def add_state(self, q):
         self.Q.add(q)
 
