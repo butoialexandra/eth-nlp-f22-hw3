@@ -6,6 +6,7 @@ install_requires = [
     "frozenlist",
     "pyconll",
     "nltk",
+    "tabulate",  # Table pretty printing
 
     # Libraries used for testing
     "pytest",

@@ -44,6 +44,8 @@ class Semiring:
         raise NotImplementedError
 
     def __eq__(self, other):
+        if not isinstance(other, Semiring):
+            return False
         return self.score == other.score
 
     def __hash__(self):
@@ -79,6 +81,8 @@ class Boolean(Semiring):
         return Boolean.one
 
     def __eq__(self, other):
+        if not isinstance(other, Boolean):
+            return False
         return self.score == other.score
 
     def __lt__(self, other):
@@ -135,6 +139,8 @@ class String(Semiring):
         return String(self.score[len(prefix) :])
 
     def __eq__(self, other):
+        if not isinstance(other, String):
+            return False
         return self.score == other.score
 
     def __repr__(self):
@@ -244,6 +250,8 @@ class Real(Semiring):
         return f"{round(self.score, 15)}"
 
     def __eq__(self, other):
+        if not isinstance(other, Real):
+            return False
         # return float(self.score) == float(other.score)
         return np.allclose(float(self.score), float(other.score), atol=1e-3)
 
@@ -283,6 +291,8 @@ class ProductSemiring(Semiring):
         return ProductSemiring(~self.score[0], ~self.score[1])
 
     def __eq__(self, other):
+        if not isinstance(other, ProductSemiring):
+            return False
         return self.score == other.score
 
     def __repr__(self):
